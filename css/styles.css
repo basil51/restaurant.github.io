@@ -23,7 +23,6 @@ section {
 }
 
 ul, li {
-	font-family: Arial, Helvetica, sans-serif;
 	font-size: 10pt;
 	color: #333;
 }
@@ -42,15 +41,11 @@ a img{
 	border: none 0px #fff;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: Arial, Helvetica, sans-serif;
-}
-
 article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu {
 	display: block;
 }
 
-#maincontent {
+.maincontent {
   background-color: #f3f3f3;
   min-height: 100%;
 }
@@ -149,7 +144,6 @@ nav h1 a {
 .filter-options select {
   background-color: white;
   border: 1px solid #fff;
-  font-family: Arial,sans-serif;
   font-size: 14pt;
   height: 35px;
   letter-spacing: 0;
@@ -172,7 +166,6 @@ nav h1 a {
 
 #restaurants-list li {
   margin-top: 15px;
-  font-family: Arial,sans-serif;
   display: flex;
   flex-direction: row;
   align-content: center;
@@ -187,6 +180,7 @@ nav h1 a {
   font-size: 1em;
   cursor: pointer;
 }
+
 
 #restaurants-list li a .restaurant-img {
   padding: 6px;
@@ -218,18 +212,22 @@ nav h1 a {
 }
 
 /* ====================== Restaurant Details ====================== */
-.inside header {
-  position: fixed;
-  top: 0;
+.inside {
+  width: 90%;
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+#header {
   width: 100%;
   z-index: 1000;
 }
+
 .inside #map-container {
   background: blue none repeat scroll 0 0;
   height: 87%;
-  position: fixed;
-  right: 0;
-  top: 80px;
   width: 50%;
 }
 .inside #map {
@@ -244,7 +242,6 @@ nav h1 a {
 }
 #restaurant-name {
   color: #f18200;
-  font-family: Arial,sans-serif;
   font-size: 20pt;
   font-weight: 200;
   letter-spacing: 0;
