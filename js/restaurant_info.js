@@ -13,9 +13,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
  */
 initMap = () => {
   fetchRestaurantFromURL((error, restaurant) => {
-    if (error) { // Got an error!
-      console.error(error);
-    } else {
+    if (error) console.error(error);
+    else {
       self.newMap = L.map('map', {
         center: [restaurant.latlng.lat, restaurant.latlng.lng],
         zoom: 16,
@@ -72,6 +71,8 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
 
   const image = document.getElementById('restaurant-img');
   image.className = 'restaurant-img'
+  image.title = `${restaurant.name}`;
+  image.alt = `${restaurant.name}`;
   image.src = DBHelper.imageUrlForRestaurant(restaurant);
 
   const cuisine = document.getElementById('restaurant-cuisine');
@@ -132,17 +133,27 @@ fillReviewsHTML = (reviews = self.restaurant.reviews) => {
  */
 createReviewHTML = (review) => {
   const li = document.createElement('li');
-  const name = document.createElement('p');
+  const header = document.createElement('div');
+  header.className = "rev_header"
+  li.appendChild(header);
+
+  const name = document.createElement('span');
   name.innerHTML = review.name;
-  li.appendChild(name);
+  header.appendChild(name);
 
-  const date = document.createElement('p');
+  const rating = document.createElement('div');
+  for (let i=1;i<6;i++) {
+    let star = document.createElement('span');
+    star.innerHTML = '★';
+    if (i>review.rating) star.className = "gray";
+    else star.className = "gold";
+    rating.appendChild(star);
+  }
+  header.appendChild(rating);
+
+  const date = document.createElement('span');
   date.innerHTML = review.date;
-  li.appendChild(date);
-
-  const rating = document.createElement('p');
-  rating.innerHTML = `Rating: ${review.rating}`;
-  li.appendChild(rating);
+  header.appendChild(date);
 
   const comments = document.createElement('p');
   comments.innerHTML = review.comments;
