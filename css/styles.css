@@ -33,8 +33,16 @@ a:hover, a:focus {
 	text-decoration: none;
 }
 
+
 article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu {
 	display: block;
+}
+
+.top_menu{
+  position: absolute;
+  left: 0px;
+  top: 0px;
+
 }
 
 .maincontent {
@@ -50,7 +58,7 @@ article, aside, canvas, details, figcaption, figure, footer, header, hgroup, men
 
 #footer {
   background-color: #444;
-  color: #aaa;
+  color: #FFF;
   font-size: 8pt;
   letter-spacing: 1px;
   padding: 25px;
@@ -353,4 +361,9 @@ nav h1 a {
 .gray {
   color: gray;
   font-size: 20px;
+}
+
+
+.aria-label {
+  display: none;
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html  lang="en">
 
 <head>
   <meta charset="utf-8">
@@ -17,24 +17,29 @@
     <nav>
       <h1><a href="/">Restaurant Reviews</a></h1>
     </nav>
-
   </header>
 
   <!-- main section -->
-  <main id="inside" class="maincontent">
+  <main id="inside" class="maincontent" role="main" aria-labelledby="maincontent_label">
+      <label id="maincontent_label" class="aria-label">Main Content</label>
       <ul id="breadcrumb" >
           <li><a href="/">Home</a></li>
       </ul>
-    <section id="map-container2">
-      <div id="map"></div>
+    <section id="map-container2" role="application" aria-hidden="true" aria-labelledby="aria-map-description">
+      <div id="map" role="application" aria-hidden="true" aria-labelledby="aria-map-description"></div>
+      <label id="aria-map-description" class="aria-label">map user interface</label>
     </section>
     <!--  restaurant  section -->
-    <section id="restaurant-container">
+    <section id="restaurant-container" aria-labelledby="container_label">
+        <label id="container_label" class="aria-label">Section Restaurant Information</label>
         <h1 id="restaurant-name"></h1>
         <img id="restaurant-img">
-        <p id="restaurant-cuisine"></p>
-        <p id="restaurant-address"></p>
-        <table id="restaurant-hours"></table>
+        <p id="restaurant-cuisine" aria-labelledby="cuisine_label"></p>
+        <label id="cuisine_label" class="aria-label">Restaurant Cuisine</label>
+        <p id="restaurant-address" aria-labelledby="address_label"></p>
+        <label id="hours_label" class="aria-label">Restaurant Hours</label>
+        <table id="restaurant-hours" aria-labelledby="hours_label"></table>
+        <label id="hours_label" class="aria-label">Restaurant Hours</label>
     </section>
     <!-- reviews section -->
     <section id="reviews-container">
