@@ -27,25 +27,25 @@ self.addEventListener('activate', (e) => {
   )
 });
 
-
-
-
-
-
-
-self.addEventListener('fetch', (event) => {
+self.addEventListener('fetch',
+function(event)
+{
   event.respondWith
   (
-    caches.match(event.request)
-    .then
-    ((response) => {if (response) return response;
-        else
-        {
-          return fetch(event.request).then((response) =>
+    caches.match(event.request).then(
+      function(response) {
+        if (response !== undefined) return response;
+        else {
+          return fetch(event.request).then(
+              function (response)
               {
                 let responseClone = response.clone();
-                caches.open(staticCacheName)
-                .then((cache) =>  cache.put(event.request, responseClone));
+                caches.open(staticCacheName).then(
+                  function(cache)
+                  {
+                    cache.put(event.request, responseClone);
+                  }
+                );
                 return response;
               }
           );
@@ -55,5 +55,3 @@ self.addEventListener('fetch', (event) => {
   ); // end of respond with
 }
 );
-
-
