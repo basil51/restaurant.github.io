@@ -1,60 +1,59 @@
-const cacheName = 'v1';
+// Define the Caches
+var staticCacheName = 'SW_v.';
+// Set Get Random number for Cache ID
+ var randomNumberBetween0and19999 = Math.floor(Math.random() * 20000);
+ var cache_id = randomNumberBetween0and19999;
+ staticCacheName += cache_id;
 
-const cacheAssets = [
-    'index.html',
-    'restaurant.html',
-    '/css/styles.css',
-    '/js/dbhelper.js',
-    '/js/register.js',
-    '/js/main.js',
-    '/js/restaurant_info.js',
-    '/img/1.jpg',
-    '/img/2.jpg',
-    '/img/3.jpg',
-    '/img/4.jpg',
-    '/img/5.jpg',
-    '/img/6.jpg',
-    '/img/7.jpg',
-    '/img/8.jpg',
-    '/img/9.jpg',
-    '/img/10.jpg',
-];
+ self.addEventListener('install', () =>
+  console.log('SW installed'));
 
-// Call Install Event
-self.addEventListener('install', (e) => {
-    console.log('SW installed');
-    e.waitUntil(
-        caches
-            .open(cacheName)
-            .then(cache => {
-                console.log('SW cashing files');
-                cache.addAll(cacheAssets);
-            })
-            .then(() => self.skipWaiting())
-    );
-});
 
 // Call Activate Event
 self.addEventListener('activate', (e) => {
-    console.log('SW activated');
-    // Remove unwanted cashes
-    e.waitUntil(
-        caches.keys().then(cacheNames => {
-            return Promise.all(
-                cacheNames.map(cache => {
-                    if (cache !== cacheName) {
-                        console.log('SW Clearing old cashe');
-                        return caches.delete(cache)
-                    }
-                })
-            )
-        })
-    )
+  console.log('SW activated');
+  // Remove unwanted cashes
+  e.waitUntil(
+      caches.keys().then(cacheNames => {
+          return Promise.all(
+              cacheNames.map(cache => {
+                  if (cache !== staticCacheName) {
+                      console.log('SW Clearing old cashe');
+                      return caches.delete(cache)
+                  }
+              })
+          )
+      })
+  )
 });
 
-// Call fetch Event
-self.addEventListener('fetch', e => {
-    console.log('Fetching');
-    e.respondWith(
-        fetch(e.request).catch(() => caches.match(e.request)));
-});
+
+
+
+
+
+
+self.addEventListener('fetch', (event) => {
+  event.respondWith
+  (
+    caches.match(event.request)
+    .then
+    ((response) => {if (response) return response;
+        else
+        {
+          return fetch(event.request).then((response) =>
+              {
+                let responseClone = response.clone();
+                caches.open(staticCacheName)
+                .then((cache) =>  cache.put(event.request, responseClone));
+                return response;
+              }
+          );
+        }
+      }
+    ) // end of promise for cache match
+  ); // end of respond with
+}
+);
+
+
